@@ -1,0 +1,23 @@
+<nav>
+	<a routerLink="/shop">Back to Shop</a>
+</nav>
+<div class="full-cart" *ngIf="hasItems()">
+	<div class="checkout-start">
+		Total: ${{cart.getTotal()}}
+	</div>
+	<ul class="cart-items">
+		<li *ngFor="let item of cart.items">
+			<span>{{item.productName}}</span> -
+			<span>{{item.colorName}}</span> -
+			<span>{{item.sizeName}}</span> -
+			<span>${{item.price}}</span>
+			<br />
+			<button (click)="incrementItem(item)">+</button>
+			<span>{{item.count}}</span>
+			<button (click)="decrementItem(item)">-</button>
+		</li>
+	</ul>
+</div>
+<div class="empty-cart" *ngIf="isEmpty()">
+	<p>The cart is empty, scrub.</p>
+</div> 

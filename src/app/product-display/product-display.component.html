@@ -1,0 +1,14 @@
+<div class="product">
+	<div class="shopPanel">
+		<p>{{product.name}}</p>
+		<p>{{product.color}}</p>
+		<button (click)="onSizes()">{{sizesMode == false ? "Buy Me" : "Cancel"}}</button>
+	</div>
+	<div class="buyPanel" *ngIf="sizesMode">
+		<ul class="sizes">
+			<li *ngFor="let size of product.sizes">
+				<button (click)="onBuy(size)" [class.available]="size.available">{{size.abbreviation}}</button>
+			</li>
+		</ul>
+	</div>
+</div>
