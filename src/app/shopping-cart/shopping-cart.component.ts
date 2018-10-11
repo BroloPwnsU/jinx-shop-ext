@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import {CartService} from '../cart.service';
 import {MessageService} from '../message.service';
@@ -12,6 +12,8 @@ import {CartItem} from '../cart-item';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
+
+	@Output() onCheckoutStart = new EventEmitter<any>();
 
 	cart: ShoppingCart;
 
@@ -32,6 +34,11 @@ export class ShoppingCartComponent implements OnInit {
 
 	decrementItem(item: CartItem): void {
 		this.cartService.decrementItem(item);
+	}
+
+	startCheckout(): void {
+	    this.messageService.add("Trying to start checkout.");
+	    this.onCheckoutStart.emit();
 	}
 
 	constructor(
