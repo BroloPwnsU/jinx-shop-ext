@@ -13,6 +13,22 @@ import {SizeItem} from './size';
 export class CartService {
 
 	cart: ShoppingCart;
+	localStorageKey: string = 'app-cart';
+
+	storeCart(): void {
+		localStorage.setItem(this.localStorageKey, JSON.stringify(this.cart));
+	}
+
+	loadCart(): void {
+		var cartStr = localStorage.getItem(this.localStorageKey);
+
+		this.cart = new ShoppingCart();
+		console.log(cartStr);
+		this.messageService.add(cartStr);
+
+		if (cartStr != null && cartStr != 'undefined')
+			this.cart.populateFromJSON(cartStr);
+	}
 
 	addItem(product: Product, size: SizeItem): CartItem {
 		if (!product || !size)
@@ -40,6 +56,8 @@ export class CartService {
 
 		this.cart.items.push(item);
 
+		this.storeCart();
+
 		return item;
 	}
 
@@ -50,6 +68,8 @@ export class CartService {
 		item.count++;
 
 		this.messageService.add(`Item ${item.itemId} incremented`);
+
+		this.storeCart();
 	}
 
 	decrementItem(item: CartItem): void {		
@@ -63,6 +83,8 @@ export class CartService {
 		{
 			this.removeItem(item);
 		}
+
+		this.storeCart();
 	}
 
 	removeItem(item: CartItem): void {
@@ -73,6 +95,8 @@ export class CartService {
 		var i = this.cart.items.indexOf(item);
 		if(i != -1)
 			this.cart.items.splice(i, 1);
+
+		this.storeCart();
 	}
 
 	getCart(): ShoppingCart {
@@ -80,7 +104,7 @@ export class CartService {
 	}
 
 	constructor(private messageService: MessageService) {
-		 this.cart = new ShoppingCart();
-		 //this.cart.items = [];
+		
+		this.loadCart();
 	}
 }

@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit {
 
 		//Amazon Pay library loaded. Let's create a button and get busy wid it.
 		var authRequest; 
-		OffAmazonPayments.Button("AmazonPayButton", "A3NUQDAIHK2DRR", { 
+		(<any>OffAmazonPayments).Button("AmazonPayButton", "A3NUQDAIHK2DRR", { 
 			type:  "PwA", 
 			color: "DarkGray", 
 			size:  "medium", 
@@ -33,7 +33,7 @@ export class CheckoutComponent implements OnInit {
 				var loginOptions = {scope: "payments:widget", popup: "true"}; 
 				authRequest = amazon.Login.authorize (loginOptions, "REDIRECT-URL");
 			}
-		};
+		});
 	}
 	
 	constructor(
