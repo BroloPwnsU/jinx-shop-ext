@@ -12,6 +12,7 @@ import { ShopSwipeComponent } from './shop-swipe/shop-swipe.component';
 import { ProductDisplayComponent } from './product-display/product-display.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartHeaderComponent } from './shopping-cart-header/shopping-cart-header.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ShoppingCartHeaderComponent } from './shopping-cart-header/shopping-car
     ShopSwipeComponent,
     ProductDisplayComponent,
     ShoppingCartComponent,
-    ShoppingCartHeaderComponent
+    ShoppingCartHeaderComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

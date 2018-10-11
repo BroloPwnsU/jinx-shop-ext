@@ -17,6 +17,8 @@
 			<button (click)="decrementItem(item)">-</button>
 		</li>
 	</ul>
+	<div class="start-checkout">
+		<button (click)="startCheckout()">CHECKOUT!</button>
 </div>
 <div class="empty-cart" *ngIf="isEmpty()">
 	<p>The cart is empty, scrub.</p>

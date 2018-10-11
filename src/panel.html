@@ -1,12 +1,29 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>BETA - J!NX Shop Twitch Extension</title>
-  <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<script type='text/javascript'>
+	    window.onAmazonLoginReady = function() {
+	    	amazon.Login.setClientId('amzn1.application-oa2-client.c7c9b6fa400b433bb8f9699b70e2a2a8');
+	    };
+	    window.onAmazonPaymentsReady = function() {
+	        if (window.angularComponentRef != null)
+	        {
+	        	window.angularComponentRef.enableAmazonPay(true);
+	        }
+	    };
+	</script>
+
+	<meta charset="utf-8">
+	<title>BETA - J!NX Shop Twitch Extension</title>
+	<base href="/">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+	<script async="async" src='https://static-na.payments-amazon.com/OffAmazonPayments/us/sandbox/js/Widgets.js'>
+	</script>
+
 </head>
 <body>
 	<app-root></app-root>
