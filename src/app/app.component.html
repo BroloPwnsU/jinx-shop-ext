@@ -1,18 +1,2 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<h1>
-  {{ title }}
-</h1>
-
-<div *ngIf="checkingOut == false">
-	<app-shopping-cart-header></app-shopping-cart-header>
-	<app-shop-swipe></app-shop-swipe>
-	<app-shopping-cart (onCheckoutStart)="startCheckout()"></app-shopping-cart>
-</div>
-<app-checkout
-	*ngIf="checkingOut == true"
-	(onCheckoutExit)="startShopping()"
-	[amazonPayLoaded]="amazonPayLoaded"
-	></app-checkout>
-
-
+<router-outlet></router-outlet>
 <app-messages></app-messages>

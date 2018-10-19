@@ -3,7 +3,7 @@
 </nav>
 <div class="full-cart" *ngIf="hasItems()">
 	<div class="checkout-start">
-		Total: ${{cart.getTotal()}}
+		Total: {{cart.subtotal | currency}}
 	</div>
 	<ul class="cart-items">
 		<li *ngFor="let item of cart.items">

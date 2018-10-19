@@ -3,7 +3,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {CartService} from '../cart.service';
 import {MessageService} from '../message.service';
 
-import {ShoppingCart} from '../shopping-cart';
+import {Order} from '../order';
 import {CartItem} from '../cart-item';
 
 @Component({
@@ -15,7 +15,7 @@ export class ShoppingCartComponent implements OnInit {
 
 	@Output() onCheckoutStart = new EventEmitter<any>();
 
-	cart: ShoppingCart;
+	cart: Order;
 
 	hasItems(): boolean {
 		if (this.cart && this.cart.items.length > 0)

@@ -1,0 +1,11 @@
+
+<div *ngIf="checkingOut == false">
+	<app-shopping-cart-header></app-shopping-cart-header>
+	<app-shop-swipe></app-shop-swipe>
+	<app-shopping-cart (onCheckoutStart)="startCheckout()"></app-shopping-cart>
+</div>
+<app-checkout-start
+	*ngIf="checkingOut == true"
+	(onCheckoutExit)="startShopping()"
+	[amazonPayLoaded]="amazonPayLoaded"
+	></app-checkout-start> 

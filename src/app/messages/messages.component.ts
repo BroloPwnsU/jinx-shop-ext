@@ -8,6 +8,12 @@ import {MessageService} from '../message.service';
 })
 export class MessagesComponent implements OnInit {
 
+	showMessages: boolean = false;
+
+	toggleMessages(): void {
+		this.showMessages = (this.showMessages) ? false : true;
+	}
+
 	constructor(
 		public messageService: MessageService
 		)
