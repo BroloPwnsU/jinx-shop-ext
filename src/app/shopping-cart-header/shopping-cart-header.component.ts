@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {CartService} from '../cart.service';
 import {CartItem} from '../cart-item';
-import {ShoppingCart} from '../shopping-cart';
+import {Order} from '../order';
 
 @Component({
   selector: 'app-shopping-cart-header',
@@ -11,14 +11,10 @@ import {ShoppingCart} from '../shopping-cart';
 })
 export class ShoppingCartHeaderComponent implements OnInit {
 
-	cart: ShoppingCart;
+	cart: Order;
 
 	loadCartItems(): void {
 		this.cart = this.cartService.getCart();
-	}
-
-	getTotal(): number {
-		return this.cart.getTotal();
 	}
 
 	constructor(private cartService: CartService) { }

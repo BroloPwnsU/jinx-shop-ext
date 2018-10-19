@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import {MessageService} from './message.service';
 
-import {ShoppingCart} from './shopping-cart';
+import {Order} from './order';
 import {CartItem} from './cart-item';
 import {Product} from './product';
 import {SizeItem} from './size';
@@ -12,7 +12,7 @@ import {SizeItem} from './size';
 })
 export class CartService {
 
-	cart: ShoppingCart;
+	cart: Order;
 	localStorageKey: string = 'app-cart';
 
 	storeCart(): void {
@@ -22,7 +22,7 @@ export class CartService {
 	loadCart(): void {
 		var cartStr = localStorage.getItem(this.localStorageKey);
 
-		this.cart = new ShoppingCart();
+		this.cart = new Order();
 		console.log(cartStr);
 		this.messageService.add(cartStr);
 
@@ -56,6 +56,7 @@ export class CartService {
 
 		this.cart.items.push(item);
 
+		this.cart.calculateSubtotal();
 		this.storeCart();
 
 		return item;
@@ -69,6 +70,7 @@ export class CartService {
 
 		this.messageService.add(`Item ${item.itemId} incremented`);
 
+		this.cart.calculateSubtotal();
 		this.storeCart();
 	}
 
@@ -84,6 +86,7 @@ export class CartService {
 			this.removeItem(item);
 		}
 
+		this.cart.calculateSubtotal();
 		this.storeCart();
 	}
 
@@ -96,11 +99,17 @@ export class CartService {
 		if(i != -1)
 			this.cart.items.splice(i, 1);
 
+		this.cart.calculateSubtotal();
 		this.storeCart();
 	}
 
-	getCart(): ShoppingCart {
+	getCart(): Order {
 		return this.cart;
+	}
+
+	clear(): void {
+		this.cart = new Order();
+		this.storeCart();
 	}
 
 	constructor(private messageService: MessageService) {
