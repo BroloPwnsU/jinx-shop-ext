@@ -1,12 +1,12 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import {CartService} from '../cart.service';
-import {MessageService} from '../message.service';
+import {CartService} from '../services/cart.service';
+import {MessageService} from '../services/message.service';
 import {CustomizationService} from '../services/customization.service';
 
-import {Order} from '../order';
-import {CartItem} from '../cart-item';
-import { UserService } from '../user.service';
+import {Order} from '../classes/order';
+import {CartItem} from '../classes/cart-item';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-shopping-cart',

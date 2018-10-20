@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 
 import {MessageService} from './message.service';
 
-import {Order} from './order';
-import {CartItem} from './cart-item';
-import {Product} from './product';
-import {SizeItem} from './size';
+import {Order} from '../classes/order';
+import {CartItem} from '../classes/cart-item';
+import {Product} from '../classes/product';
+import {SizeItem} from '../classes/size';
 
 @Injectable({
   providedIn: 'root'

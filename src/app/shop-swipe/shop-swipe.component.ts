@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Product} from '../product';
-import {SizeItem} from '../size';
-import {ProductService} from '../product.service';
-import {MessageService} from '../message.service';
+import {Product} from '../classes/product';
+import {SizeItem} from '../classes/size';
+import {ProductService} from '../services/product.service';
+import {MessageService} from '../services/message.service';
 
 @Component({
   selector: 'app-shop-swipe',
