@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-import { InMemoryProductDataService }  from './in-memory-product-data.service';
+import { InMemoryProductDataService }  from './services/in-memory-product-data.service';
 
 import { AppRoutingModule } from './app-routing.module';
 

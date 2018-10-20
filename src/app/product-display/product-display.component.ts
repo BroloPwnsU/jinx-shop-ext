@@ -1,9 +1,9 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 
-import {CartService} from '../cart.service';
-import {MessageService} from '../message.service';
-import {Product} from '../product';
-import {SizeItem} from '../size';
+import {CartService} from '../services/cart.service';
+import {MessageService} from '../services/message.service';
+import {Product} from '../classes/product';
+import {SizeItem} from '../classes/size';
 
 @Component({
   selector: 'app-product-display',
