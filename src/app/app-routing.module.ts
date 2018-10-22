@@ -8,6 +8,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
 	{ path: 'shop', component: ShopComponent },
+	{ path: 'panel', component: ShopComponent },
+	{ path: 'panel.html', component: ShopComponent },
 	{ path: 'cart', component: ShoppingCartComponent },
 	{ path: 'complete', component: CheckoutCompleteComponent },
 	{ path: '', redirectTo: 'shop', pathMatch: 'full' },

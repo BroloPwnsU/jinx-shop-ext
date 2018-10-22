@@ -16,7 +16,7 @@
 	
 	<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0"/>
 	<meta charset="utf-8">
-	<title>BETA - J!NX Shop Twitch Extension</title>
+	<title>Merch Booth - powered by J!NX</title>
 	<base href="/">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,11 +30,11 @@
 <body>
 
 	<app-root></app-root>
-<!--
+
 <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
--->
+
 <!-- TODO:  remove the following script tag before submitting to Twitch for testing or production. -->
-<!--<script src="https://localhost.rig.twitch.tv:3000/twitch-ext.js"></script>
+<!--<script src="https://localhost.rig.twitch.tv:3000/twitch-ext.js"></script>-->
 
 <script>
 	let token, userId;
@@ -46,11 +46,26 @@
 	});
 
 	twitch.onAuthorized((auth) => {
-	  token = auth.token;
-	  userId = auth.userId;
+		console.log(auth.channelId);
+
+		//Save the identifiers to our app so we can reuse them
+		if (window.twitchTunnel != null)
+		{			
+			window.twitchTunnel.setTwitchAuth({token: auth.token, userId: auth.userId, channelId: auth.channelId});
+		}
+		else
+		{
+			//If the twitch tunnel hasn't been opened yet by our app, drill it from this side
+			window.twitchTunnel = {
+				authObject: {
+					token: auth.token,
+					userId: auth.userId,
+					channelId: auth.channelId
+				}
+			}
+		}
 	});
 </script>
--->
 
 </body>
 </html>

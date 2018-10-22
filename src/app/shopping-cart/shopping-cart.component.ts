@@ -7,6 +7,7 @@ import {CustomizationService} from '../services/customization.service';
 import {Order} from '../classes/order';
 import {CartItem} from '../classes/cart-item';
 import { UserService } from '../services/user.service';
+import { StoreCustomization } from '../classes/store-customization';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -68,10 +69,10 @@ export class ShoppingCartComponent implements OnInit {
 		// Items, Customer ID, Stream ID, etc.
 		let cartParams = this.buildCartString();
 
-		let opaqueId = this.userService.getOpaqueId();
-		let channelId = this.userService.getChannelId();
+		let userAuth = this.userService.getUserAuth();
+		//let channelId = this.userService.getChannelId();
 
-		return `cart=${cartParams}&channel=${channelId}&user=${opaqueId}`;
+		return `cart=${cartParams}&usertoken=${userAuth.token}&userid=${userAuth.userId}&channelid=${userAuth.channelId}`;
 	}
 
 
@@ -84,10 +85,15 @@ export class ShoppingCartComponent implements OnInit {
 			return;
 		}
 
+		let customization: StoreCustomization = null;
+		this.customService.getCustomization().subscribe(
+			(cust) => { customization = cust; } 
+		);
+
 		let windowParams: string = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${this.checkoutWindow.width},height=${this.checkoutWindow.height},left=${this.checkoutWindow.left},top=${this.checkoutWindow.top}`;
 		open(
 			this.checkoutUrl + '?' + this.buildPageParams()
-			, this.customService.getCheckoutWindowTitle()
+			, customization.title
 			, windowParams
 			);
 		return false;
