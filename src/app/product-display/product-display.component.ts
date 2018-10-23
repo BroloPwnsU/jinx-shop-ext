@@ -3,7 +3,7 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import {CartService} from '../services/cart.service';
 import {MessageService} from '../services/message.service';
 import {Product} from '../classes/product';
-import {SizeItem} from '../classes/size';
+import {SizeItem} from '../classes/size-item';
 
 @Component({
   selector: 'app-product-display',

@@ -5,6 +5,13 @@
 	<div class="checkout-start">
 		Total: {{cart.subtotal | currency}}
 	</div>
+	<hr />
+	<div class="start-checkout">
+		<button id="pop" (click)="openCheckout()">Checkout</button>
+		<br />
+		Opens checkout in new window.
+	</div>
+	<hr />
 	<ul class="cart-items">
 		<li *ngFor="let item of cart.items">
 			<span>{{item.productName}}</span> -
@@ -17,9 +24,6 @@
 			<button (click)="decrementItem(item)">-</button>
 		</li>
 	</ul>
-	<div class="start-checkout">
-		<a href="" id="pop" (click)="openCheckout()">Open Popup</a>
-	</div>
 </div>
 <div class="empty-cart" *ngIf="isEmpty()">
 	<p>The cart is empty, scrub.</p>

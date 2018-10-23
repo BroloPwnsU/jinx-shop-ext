@@ -1,4 +1,4 @@
-import {SizeItem} from './size';
+import {SizeItem} from './size-item';
 
 export class Product {
 
@@ -10,7 +10,7 @@ export class Product {
 	id: number;
 	colorId: number;
 
-	price: number;
+	numberOfPhotos: number;
 	
 	sizes: SizeItem[];
 }

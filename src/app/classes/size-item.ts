@@ -6,5 +6,7 @@ export class SizeItem {
 	id: number;
 	itemId: number;
 
+	price: number;
+
 	available: boolean;
 }
