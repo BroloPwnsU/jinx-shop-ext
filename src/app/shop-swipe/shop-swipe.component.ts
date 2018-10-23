@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {Product} from '../classes/product';
-import {SizeItem} from '../classes/size';
+import {SizeItem} from '../classes/size-item';
 import {ProductService} from '../services/product.service';
 import {MessageService} from '../services/message.service';
 

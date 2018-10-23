@@ -5,7 +5,7 @@ import {MessageService} from './message.service';
 import {Order} from '../classes/order';
 import {CartItem} from '../classes/cart-item';
 import {Product} from '../classes/product';
-import {SizeItem} from '../classes/size';
+import {SizeItem} from '../classes/size-item';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +50,7 @@ export class CartService {
 			sizeId: size.id,
 			itemId: size.itemId,
 
-			price: product.price,
+			price: size.price,
 			count: 1
 		};
 

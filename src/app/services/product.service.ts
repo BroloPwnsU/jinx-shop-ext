@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import {Product} from '../classes/product';
 import {MessageService} from '../services/message.service';
+import { CustomizationService } from './customization.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,16 +16,22 @@ const httpOptions = {
 })
 export class ProductService {
 	
-	private productsUrl = 'api/products';  // URL to web api
+	private productsUrl = 'http://localhost:8112/products';  // URL to web api
 	
 	getProducts(): Observable<Product[]> {
-		return this.http.get<Product[]>(this.productsUrl)
+
+		let keywordString = this.buildMetaKeywordIdString();
+		let productString = this.buildProductIdString();
+		let storeProductUrl: string = `${this.productsUrl}/get_products.json?productids=${productString}&keywordids=${keywordString}`;
+
+		return this.http.get<Product[]>(storeProductUrl)
 		    .pipe(
-		    	tap(products => this.log('fetched products'))
+		    	tap(products => this.log('Fetched products'))
 		    	, catchError(this.handleError('getProducts', []))
 		    );
 	}
 
+	/*
 	getProduct(id: number): Observable<Product> {
 		const url = `${this.productsUrl}/${id}`;
 
@@ -33,6 +40,7 @@ export class ProductService {
 				, catchError(this.handleError<Product>(`getProduct id=${id}`))
 			);
 	}
+	*/
 
 	/* GET products whose name contains search term */
 	searchProducts(term: string): Observable<Product[]> {
@@ -43,34 +51,6 @@ export class ProductService {
 		return this.http.get<Product[]>(`${this.productsUrl}/?name=${term}`).pipe(
 			tap(_ => this.log(`found products matching "${term}"`)),
 			catchError(this.handleError<Product[]>('searchProducts', []))
-		);
-	}
-	
-	/** PUT: update the product on the server */
-	updateProduct (product: Product): Observable<any> {
-		return this.http.put(this.productsUrl, product, httpOptions).pipe(
-			tap(_ => this.log(`updated product id=${product.id}`)),
-			catchError(this.handleError<any>('updateProduct'))
-		);
-	}
-
-
-	/** POST: add a new product to the server */
-	addProduct (product: Product): Observable<Product> {
-		return this.http.post<Product>(this.productsUrl, product, httpOptions).pipe(
-			tap((product: Product) => this.log(`added product w/ id=${product.id}`)),
-			catchError(this.handleError<Product>('addProduct'))
-		);
-	}
-
-	/** DELETE: delete the product from the server */
-	deleteProduct (product: Product | number): Observable<Product> {
-		const id = typeof product === 'number' ? product : product.id;
-		const url = `${this.productsUrl}/${id}`;
-
-		return this.http.delete<Product>(url, httpOptions).pipe(
-			tap(_ => this.log(`deleted product id=${id}`)),
-			catchError(this.handleError<Product>('deleteProduct'))
 		);
 	}
 
@@ -98,8 +78,39 @@ export class ProductService {
 		this.messageService.add(`ProductService: ${message}`);
 	}
 
+	private buildMetaKeywordIdString(): string {
+		let commaDelimited: string = "";
+		let metaKeywordIds = this.customizationService.customization.metaKeywordIds;
+		if (metaKeywordIds == null || metaKeywordIds.length == 0)
+			return commaDelimited;
+
+		//Cart is represented by itemid/count pairs.
+		commaDelimited = metaKeywordIds.reduce( (tally, id) => {
+			return `${id},` + tally;
+		}, "");
+
+		//Cut off the last semicolon.
+		return commaDelimited.slice(0, commaDelimited.length - 1);
+    }
+    
+	private buildProductIdString(): string {
+		let commaDelimited: string = "";
+		let productIds = this.customizationService.customization.productIds;
+		if (productIds == null || productIds.length == 0)
+			return commaDelimited;
+
+		//Cart is represented by itemid/count pairs.
+		commaDelimited = productIds.reduce( (tally, id) => {
+			return `${id},` + tally;
+		}, "");
+
+		//Cut off the last semicolon.
+		return commaDelimited.slice(0, commaDelimited.length - 1);
+	}
+
 	constructor(
 		private http: HttpClient,
+		private customizationService: CustomizationService,
 		private messageService: MessageService
 		) 
 	{ }

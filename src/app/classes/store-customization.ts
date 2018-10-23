@@ -1,4 +1,6 @@
 export class StoreCustomization {
-    metaKeywords: string[];
+    metaKeywordIds: string[];
+    productIds: string[];
     title: string;
+    
 }

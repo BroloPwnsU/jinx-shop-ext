@@ -1,10 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import {MessageService} from './message.service';
 
 import {StoreCustomization} from '../classes/store-customization';
 import { UserService } from './user.service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +15,12 @@ export class CustomizationService implements OnInit {
     //CustomizationService provides data for the channel
 
     defaultTitle = "Shroud Merch Booth - powered by J!NX";
-    defaultMetaKeywords = ["1"];
+    defaultMetaKeywordIds = ["1"];
+    defaultProductsIds: ["9036", "8806", "9382"]
 
     customization: StoreCustomization;
+
+    customizationUrl: string = "http://localhost:8112/channels";
 
     getCustomization(): Observable<StoreCustomization> {
         if (this.customization != null) {
@@ -25,26 +30,62 @@ export class CustomizationService implements OnInit {
             });
         }
         else {
+
+            let userAuth = this.userService.getUserAuth();
+            
+            let storeCustomUrl: string = `${this.customizationUrl}/get_store_config.json?channelid=${userAuth.channelId}`;
+    
+            return this.http.get<StoreCustomization>(storeCustomUrl)
+                .pipe(
+                    tap(customization => { this.customization = customization; this.log('Fetched customization.'); })
+                    , catchError(this.handleError('getCustomization', null))
+                );
+            
             /*
-            //TODO: Use the channelId to load the customization.
-            //Set defaults.
+            //Use the channelId to load the customization.
+            //TODO: Set defaults.
             if (this.customization.title == null || this.customization.title == "")
                 this.customization.title = this.defaultTitle;
-                
-            if (this.customization.metaKeywords == null || this.customization.metaKeywords.length == 0)
-                this.customization.metaKeywords = this.defaultMetaKeywords;
             */
         }
     }
 
+	/**
+	 * Handle Http operation that failed.
+	 * Let the app continue.
+	 * @param operation - name of the operation that failed
+	 * @param result - optional value to return as the observable result
+	 */
+	private handleError<T> (operation = 'operation', result?: T) {
+	  return (error: any): Observable<T> => {
+	 
+	    // TODO: send the error to remote logging infrastructure
+	    console.error(error); // log to console instead
+	 
+	    // TODO: better job of transforming error for user consumption
+	    this.log(`${operation} failed: ${error.message}`);
+	 
+	    // Let the app keep running by returning an empty result.
+	    return of(result as T);
+	  };
+	}
+
+	private log(message: string) {
+		this.messageService.add(`ProductService: ${message}`);
+	}
+
 	constructor(
         private userService: UserService,
-        private messageService: MessageService
+        private messageService: MessageService,
+		private http: HttpClient
         ) {
 
+        /*
         this.customization = new StoreCustomization();
         this.customization.title = this.defaultTitle;
-        this.customization.metaKeywords = this.defaultMetaKeywords;
+        this.customization.metaKeywordIds = this.defaultMetaKeywordIds;
+        this.customization.productIds = this.defaultProductsIds;
+        */
     }
     
     ngOnInit(): void {
