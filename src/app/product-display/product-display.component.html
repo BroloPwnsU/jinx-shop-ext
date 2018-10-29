@@ -1,15 +1,19 @@
-<div class="product">
-	<img src="https://www.jinx.com/productimage/{{product.id}}/{{product.colorId}}/1/400.jpg" />
-	<div class="shopPanel">
-		<p>{{product.name}}</p>
-		<p>{{product.color}}</p>
-		<button (click)="onSizes()">{{sizesMode == false ? "Buy Me" : "Cancel"}}</button>
-	</div>
-	<div class="buyPanel" *ngIf="sizesMode">
-		<ul class="sizes">
-			<li *ngFor="let size of product.sizes">
-				<button (click)="onBuy(size)" [class.available]="size.available">{{size.abbreviation}}</button>
-			</li>
-		</ul>
-	</div>
-</div>
+<mat-card class="product">
+	<mat-card-header>
+		<mat-card-title>{{product.name}}</mat-card-title>
+		<mat-card-subtitle>{{product.color}}</mat-card-subtitle>
+	</mat-card-header>
+	<img mat-card-image src="{{product.photoStubs[this.activePhoto-1]}}400.jpg" alt="Photo of another fantastic product">
+	<mat-card-actions>
+			<button mat-icon-button color="primary" (click)="onPreviousPhoto()"><mat-icon>arrow_left</mat-icon></button>
+			<button mat-icon-button color="primary" (click)="onNextPhoto()" style="text-align: right;"><mat-icon>arrow_right</mat-icon></button>
+	</mat-card-actions>
+	<mat-card-actions>
+		<button mat-fab color="primary" *ngFor="let size of product.sizes" (click)="onBuy(size)" [attr.disabled] = "size.available === 0 ? 'disabled' : null">{{size.abbreviation}}</button>
+	</mat-card-actions>
+	<mat-card-content>
+		<p>
+		Pre-Order - Ships 11/7/2019
+		</p>
+	</mat-card-content>
+</mat-card>

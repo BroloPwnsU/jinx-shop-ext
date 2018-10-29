@@ -11,6 +11,8 @@ export class Product {
 	colorId: number;
 
 	numberOfPhotos: number;
+
+	photoStubs: string[];
 	
 	sizes: SizeItem[];
 }

@@ -16,6 +16,7 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 
 	sizesMode: boolean;
 	buttonMessage: string;
+	activePhoto: number = 1;
 
 	setSizesMode(active: boolean): void {
 		if (!active)
@@ -48,6 +49,24 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 		this.setSizesMode(false);
 	}
 
+	onNextPhoto(): void {
+		if (this.activePhoto < 1 || this.activePhoto >= this.product.numberOfPhotos)
+			this.activePhoto = 1;
+		else
+			this.activePhoto = this.activePhoto + 1;
+
+		this.messageService.add("Ph " + this.activePhoto);
+	}
+
+	onPreviousPhoto(): void {
+		if (this.activePhoto <= 1 || this.activePhoto > this.product.numberOfPhotos)
+			this.activePhoto = this.product.numberOfPhotos;
+		else
+			this.activePhoto = this.activePhoto - 1;
+			
+		this.messageService.add("Ph " + this.activePhoto);
+	}
+
 	constructor(
 		private messageService: MessageService,
 		private cartService: CartService
@@ -58,6 +77,7 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges() {
+		this.activePhoto = 1;
 		this.setSizesMode(false);
 	}
 }

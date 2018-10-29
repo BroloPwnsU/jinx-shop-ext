@@ -1,10 +1,12 @@
-<p>{{title}}</p>
-<div *ngIf="customizationLoaded">
-    <router-outlet></router-outlet>
+<div class="main-container">
+    <div *ngIf="customizationLoaded">
+        <router-outlet></router-outlet>
+    </div>
+    <div *ngIf="customizationLoaded == false">
+        Loading...<br />
+        <img src="assets/images/apples_suck.gif" />
+        <button (click)="fabricateAuth()">Fabricate Auth</button>
+    </div>
 </div>
-<div *ngIf="customizationLoaded == false">
-    Loading...<br />
-    <img src="assets/images/apples_suck.gif" />
-    <button (click)="fabricateAuth()">Fabricate Auth</button>
-</div>
+
 <app-messages></app-messages>
