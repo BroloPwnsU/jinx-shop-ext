@@ -1,12 +1,11 @@
 
 <div *ngIf="products">
-	Derp-Squad Product Count: {{products.length}}
 	<div class="shop-swipe">
 		<app-product-display [product]="activeProduct"></app-product-display>
 	</div>
 	<div class="buttons">
-		<button (click)="onPrevious()">Prev</button>
-		<button (click)="onNext()">Next</button>
+		<button mat-flat-button color="accent" (click)="onPrevious()">Prev Product</button>
+		<button mat-flat-button color="accent" (click)="onNext()" style="float: right;">Next Product</button>
 	</div>
 </div>
 

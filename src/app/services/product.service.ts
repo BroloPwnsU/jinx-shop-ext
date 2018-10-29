@@ -26,7 +26,15 @@ export class ProductService {
 
 		return this.http.get<Product[]>(storeProductUrl)
 		    .pipe(
-		    	tap(products => this.log('Fetched products'))
+		    	tap((products) => {
+					for(var j = 0; j < products.length; j++) {
+						products[j].photoStubs = new Array();
+						for (var i = 0; i < products[j].numberOfPhotos; i++) {
+							products[j].photoStubs.push(`https://www.jinx.com/productimage/${products[j].id}/${products[j].colorId}/${i+1}/`);
+						}
+					}
+					this.log('Fetched products');
+				})
 		    	, catchError(this.handleError('getProducts', []))
 		    );
 	}

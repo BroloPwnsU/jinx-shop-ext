@@ -1,0 +1,10 @@
+<div *ngIf="products">
+  <div class="shop-list">
+    <app-product-display [product]="product" *ngFor="let product of products"></app-product-display>
+  </div>
+</div>
+
+<div *ngIf="products == null || products.length == 0">
+  No products loaded
+</div>
+  

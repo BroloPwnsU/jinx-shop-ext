@@ -1,30 +1,31 @@
 <nav>
-	<a routerLink="/shop">Back to Shop</a>
+	<a mat-flat-button color="accent" routerLink="/shop">
+		<mat-icon>backspace</mat-icon> &nbsp; Shop some more...
+	</a>
 </nav>
 <div class="full-cart" *ngIf="hasItems()">
-	<div class="checkout-start">
+	<hr />
+	<h3 class="checkout-start">
 		Total: {{cart.subtotal | currency}}
-	</div>
-	<hr />
-	<div class="start-checkout">
-		<button id="pop" (click)="openCheckout()">Checkout</button>
-		<br />
-		Opens checkout in new window.
-	</div>
-	<hr />
-	<ul class="cart-items">
-		<li *ngFor="let item of cart.items">
-			<span>{{item.productName}}</span> -
-			<span>{{item.colorName}}</span> -
-			<span>{{item.sizeName}}</span> -
-			<span>${{item.price}}</span>
-			<br />
-			<button (click)="incrementItem(item)">+</button>
-			<span>{{item.count}}</span>
-			<button (click)="decrementItem(item)">-</button>
-		</li>
-	</ul>
+		<button mat-flat-button color="primary" matTooltip="Opens checkout in popup window." id="pop" (click)="openCheckout()">
+			Checkout <mat-icon>directions_run</mat-icon>
+		</button>
+	</h3>
+
+	<mat-list>
+		<mat-list-item *ngFor="let item of cart.items">
+			
+			<h4 mat-line>{{item.productName}}</h4>
+			<p mat-line>
+				<button mat-icon-button color="primary" (click)="incrementItem(item)"><mat-icon>add_circle</mat-icon></button>
+				<span>{{item.count}}</span>
+				<button mat-icon-button color="primary" (click)="decrementItem(item)"><mat-icon>remove_circle</mat-icon></button>
+				<span>{{item.colorName}}</span> - <span>{{item.sizeName}}</span>
+			</p>
+		</mat-list-item>
+	</mat-list>
+
 </div>
 <div class="empty-cart" *ngIf="isEmpty()">
-	<p>The cart is empty, scrub.</p>
+	<p>The cart is empty af.</p>
 </div> 

@@ -4,6 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatTableModule} from '@angular/material/table';
+import {MatListModule} from '@angular/material/list';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -14,6 +22,7 @@ import { ShoppingCartHeaderComponent } from './shopping-cart-header/shopping-car
 import { ShopComponent } from './shop/shop.component';
 import { ErrorPageMissingComponent } from './error-page-missing/error-page-missing.component';
 import { CheckoutCompleteComponent } from './checkout-complete/checkout-complete.component';
+import { ShopListComponent } from './shop-list/shop-list.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +34,22 @@ import { CheckoutCompleteComponent } from './checkout-complete/checkout-complete
     ShoppingCartComponent,
     ShoppingCartHeaderComponent,
     ProductDisplayComponent,
-    CheckoutCompleteComponent
+    CheckoutCompleteComponent,
+    ShopListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatBadgeModule,
+    MatTableModule,
+    MatListModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

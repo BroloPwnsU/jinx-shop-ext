@@ -1,6 +1,5 @@
 <nav>
-	{{cart.items.length}} items / ${{cart.subtotal}}
+	<a mat-button color="primary" routerLink="/cart"><mat-icon  matBadge="{{cart.items.length}}" matBadgePosition="after" matBadgeSize="medium" matBadgeColor="warn">shopping_cart</mat-icon></a>
+	Subtotal: {{cart.subtotal | currency}}
+	<a mat-flat-button color="primary" routerLink="/cart">View Cart</a>
 </nav>
-<p>
-	<a routerLink="/cart">View Cart</a>
-</p>
