@@ -72,7 +72,7 @@ export class ShoppingCartComponent implements OnInit {
 		let userAuth = this.userService.getUserAuth();
 		//let channelId = this.userService.getChannelId();
 
-		return `cart=${cartParams}&usertoken=${userAuth.token}&userid=${userAuth.userId}&channelid=${userAuth.channelId}`;
+		return `cart=${cartParams}&token=${userAuth.token}&userid=${userAuth.userId}&channelid=${userAuth.channelId}`;
 	}
 
 
