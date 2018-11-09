@@ -17,20 +17,28 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 	sizesMode: boolean;
 	buttonMessage: string;
 	activePhoto: number = 1;
+	selectedSize: SizeItem = null;
+	oneSize: boolean = false;
+	presale: boolean = false;
+	presaleDate: string = null;
 
-	setSizesMode(active: boolean): void {
-		if (!active)
-			active = false;
+	setupProduct(): void {
+		if (this.product == null)
+			return;
 
-		this.sizesMode = active;
+		this.activePhoto = 1;
+		this.selectedSize = null;
+		this.oneSize = (this.product.sizes.length == 1);
+
+		if (this.product.presaleDate != null) {
+			this.presale = true;
+		}
+		else {
+			this.presale = false;
+		}
 	}
 
-	onSizes(): void {
-		//Show the item/sizes component
-		this.setSizesMode(true);
-	}
-
-	onBuy(size: SizeItem): void {
+	selectSize(size: SizeItem): void {
 		//They want to purchase the selected size.
 
 		// Make sure it has stock.
@@ -45,8 +53,18 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 			return;
 		}
 
-		this.cartService.addItem(this.product, size);
-		this.setSizesMode(false);
+		this.selectedSize = size;
+	}
+
+	cancelAdd(): void {
+		this.selectedSize = null;
+	}
+
+	addToCart(): void {
+		//Adds the previously selected size to the cart.
+
+		this.cartService.addItem(this.product, this.selectedSize);
+		this.selectedSize = null;
 	}
 
 	onNextPhoto(): void {
@@ -74,10 +92,10 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 	}
 
 	ngOnInit() {
+		this.setupProduct();
 	}
 
 	ngOnChanges() {
-		this.activePhoto = 1;
-		this.setSizesMode(false);
+		this.setupProduct();
 	}
 }

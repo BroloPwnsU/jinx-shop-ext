@@ -12,6 +12,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatTableModule} from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -23,6 +24,8 @@ import { ShopComponent } from './shop/shop.component';
 import { ErrorPageMissingComponent } from './error-page-missing/error-page-missing.component';
 import { CheckoutCompleteComponent } from './checkout-complete/checkout-complete.component';
 import { ShopListComponent } from './shop-list/shop-list.component';
+import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
+import { ProductImageComponent } from './product-image/product-image.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { ShopListComponent } from './shop-list/shop-list.component';
     ShoppingCartHeaderComponent,
     ProductDisplayComponent,
     CheckoutCompleteComponent,
-    ShopListComponent
+    ShopListComponent,
+    LoadingPanelComponent,
+    ProductImageComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,8 @@ import { ShopListComponent } from './shop-list/shop-list.component';
     MatBadgeModule,
     MatTableModule,
     MatListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

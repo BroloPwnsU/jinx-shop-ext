@@ -1,12 +1,17 @@
 
 <div *ngIf="products">
+	<div class="buttons">
+		<button mat-flat-button color="accent" (click)="onPrevious()" class="product-arrow float-left">
+			<mat-icon>arrow_left</mat-icon>
+		</button>
+		<button mat-flat-button color="accent" (click)="onNext()" class="product-arrow float-right">
+			<mat-icon>arrow_right</mat-icon>
+		</button>
+	</div>
 	<div class="shop-swipe">
 		<app-product-display [product]="activeProduct"></app-product-display>
 	</div>
-	<div class="buttons">
-		<button mat-flat-button color="accent" (click)="onPrevious()">Prev Product</button>
-		<button mat-flat-button color="accent" (click)="onNext()" style="float: right;">Next Product</button>
-	</div>
+	<div class="clear"></div>
 </div>
 
 <div *ngIf="products == null || products.length == 0">

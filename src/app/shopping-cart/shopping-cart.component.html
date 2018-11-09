@@ -1,8 +1,4 @@
-<nav>
-	<a mat-flat-button color="accent" routerLink="/shop">
-		<mat-icon>backspace</mat-icon> &nbsp; Shop some more...
-	</a>
-</nav>
+<app-shopping-cart-header onCartPage="true"></app-shopping-cart-header>
 <div class="full-cart" *ngIf="hasItems()">
 	<hr />
 	<h3 class="checkout-start">
@@ -13,13 +9,13 @@
 	</h3>
 
 	<mat-list>
-		<mat-list-item *ngFor="let item of cart.items">
+		<mat-list-item *ngFor="let item of cart.items" style="text-align: left;">
 			
 			<h4 mat-line>{{item.productName}}</h4>
 			<p mat-line>
-				<button mat-icon-button color="primary" (click)="incrementItem(item)"><mat-icon>add_circle</mat-icon></button>
+				<button mat-icon-button (click)="incrementItem(item)"><mat-icon>add_circle</mat-icon></button>
 				<span>{{item.count}}</span>
-				<button mat-icon-button color="primary" (click)="decrementItem(item)"><mat-icon>remove_circle</mat-icon></button>
+				<button mat-icon-button (click)="decrementItem(item)"><mat-icon>remove_circle</mat-icon></button>
 				<span>{{item.colorName}}</span> - <span>{{item.sizeName}}</span>
 			</p>
 		</mat-list-item>
