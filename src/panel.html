@@ -28,9 +28,8 @@
 
 </head>
 <body>
-
 	<app-root></app-root>
-
+	
 <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
 
 <!-- TODO:  remove the following script tag before submitting to Twitch for testing or production. -->
@@ -46,8 +45,6 @@
 	});
 
 	twitch.onAuthorized((auth) => {
-		console.log(auth.channelId);
-
 		//Save the identifiers to our app so we can reuse them
 		if (window.twitchTunnel != null)
 		{			

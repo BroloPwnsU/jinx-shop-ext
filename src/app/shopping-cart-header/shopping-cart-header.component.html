@@ -1,5 +1,12 @@
+<div class="cart-icon">
+	<a mat-button color="primary" routerLink="/cart"><mat-icon  matBadge="{{cart.getCount()}}" matBadgePosition="after" matBadgeSize="medium" matBadgeColor="warn">shopping_cart</mat-icon></a>
+</div>
 <nav>
-	<a mat-button color="primary" routerLink="/cart"><mat-icon  matBadge="{{cart.items.length}}" matBadgePosition="after" matBadgeSize="medium" matBadgeColor="warn">shopping_cart</mat-icon></a>
-	Subtotal: {{cart.subtotal | currency}}
-	<a mat-flat-button color="primary" routerLink="/cart">View Cart</a>
+	<div *ngIf="onCartPage == false">
+		Subtotal: {{cart.subtotal | currency}}
+		<a mat-flat-button color="primary" routerLink="/cart">View Cart</a>
+	</div>
+	<a *ngIf="onCartPage" mat-stroked-button color="primary" routerLink="/shop">
+		<mat-icon>backspace</mat-icon> &nbsp; Shop some more...
+	</a>
 </nav>

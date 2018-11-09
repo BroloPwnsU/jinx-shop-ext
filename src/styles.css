@@ -12,7 +12,7 @@ h2, h3 {
   font-weight: lighter;
 }
 body {
-  margin: 2em;
+  margin: 0;
 }
 body, input[text], button {
   color: #888;
@@ -21,4 +21,82 @@ body, input[text], button {
 /* everywhere else */
 * {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+div.fake-iframe {
+  /*
+  margin-top: 20px;
+  width: 320px;
+  height: 600px;
+  border: 1px solid gray;
+  overflow: scroll;
+  margin: auto;
+  text-align: center;
+  */
+}
+
+nav {
+  text-align: right;
+}
+
+.cart-icon {
+  position: fixed;
+  left: 0;
+  top: 5px;
+}
+
+.center-wrapper {
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.stay-square {
+  width: 100%;
+  padding-bottom: 100%;
+  margin-bottom: 4px; /*Fudge to fix jumpiness*/
+}
+
+.stay-square div.stretchy-wrapper {
+  position: relative;
+}
+
+.stay-square div.stretchy-wrapper > div {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+}
+
+.image-changer span {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.product-details {
+  padding: 10px;
+}
+
+.product-details .mat-mini-fab {
+  margin: 0 2px;
+}
+
+.product-details .presale-date {
+  color: red;
+  padding-bottom: 10px;
+}
+
+.clear {
+  clear: both;
+}
+
+.product-arrow {
+  width: 20px;
+  height: 40px;
+}
+
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
 }

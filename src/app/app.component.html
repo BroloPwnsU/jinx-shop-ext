@@ -1,12 +1,26 @@
-<div class="main-container">
-    <div *ngIf="customizationLoaded">
-        <router-outlet></router-outlet>
-    </div>
-    <div *ngIf="customizationLoaded == false">
-        Loading...<br />
-        <img src="assets/images/apples_suck.gif" />
-        <button (click)="fabricateAuth()">Fabricate Auth</button>
+<div class="fake-iframe">
+    <div class="center-wrapper">
+        <div *ngIf="customizationLoaded">
+            <router-outlet></router-outlet>
+        </div>
+        <div *ngIf="loadingConfig">
+            <app-loading-panel message="Loading the Merch..."></app-loading-panel>
+            <button (click)="fabricateAuth()">Fabricate Auth</button>
+        </div>
+        <div *ngIf="shopLoadError" class="config-error">
+            <mat-icon color="warn" class="big-problem">error</mat-icon>
+            <p>
+                Merch Booth is broken.
+            </p>
+            <p>
+                Please tell the streamer to fix their Merch Booth config settings.
+            </p>
+            <p>
+                Have a nice day.
+            </p>
+        </div>
     </div>
 </div>
 
 <app-messages></app-messages>
+

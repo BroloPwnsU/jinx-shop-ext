@@ -12,6 +12,8 @@ export class Product {
 
 	numberOfPhotos: number;
 
+	presaleDate: string;
+
 	photoStubs: string[];
 	
 	sizes: SizeItem[];

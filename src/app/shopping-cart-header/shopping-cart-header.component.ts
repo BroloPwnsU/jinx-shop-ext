@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import {CartService} from '../services/cart.service';
 import {CartItem} from '../classes/cart-item';
@@ -12,6 +12,8 @@ import {Order} from '../classes/order';
 export class ShoppingCartHeaderComponent implements OnInit {
 
 	cart: Order;
+
+	@Input() onCartPage: boolean = false;
 
 	loadCartItems(): void {
 		this.cart = this.cartService.getCart();

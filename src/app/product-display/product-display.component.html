@@ -1,19 +1,35 @@
-<mat-card class="product">
-	<mat-card-header>
-		<mat-card-title>{{product.name}}</mat-card-title>
-		<mat-card-subtitle>{{product.color}}</mat-card-subtitle>
-	</mat-card-header>
-	<img mat-card-image src="{{product.photoStubs[this.activePhoto-1]}}400.jpg" alt="Photo of another fantastic product">
-	<mat-card-actions>
-			<button mat-icon-button color="primary" (click)="onPreviousPhoto()"><mat-icon>arrow_left</mat-icon></button>
-			<button mat-icon-button color="primary" (click)="onNextPhoto()" style="text-align: right;"><mat-icon>arrow_right</mat-icon></button>
-	</mat-card-actions>
-	<mat-card-actions>
-		<button mat-fab color="primary" *ngFor="let size of product.sizes" (click)="onBuy(size)" [attr.disabled] = "size.available === 0 ? 'disabled' : null">{{size.abbreviation}}</button>
-	</mat-card-actions>
-	<mat-card-content>
-		<p>
-		Pre-Order - Ships 11/7/2019
-		</p>
-	</mat-card-content>
-</mat-card>
+<div class="product">
+	<h4>{{product.name}} - {{product.colorName}}</h4>
+	<app-product-image [imageFolder]="product.photoStubs[this.activePhoto-1]" size="320"></app-product-image>
+	<div class="image-changer" *ngIf="product.numberOfPhotos > 1">
+			<button mat-stroked-button (click)="onPreviousPhoto()"><mat-icon>arrow_back</mat-icon></button>
+			<span>Image {{activePhoto}} of {{product.numberOfPhotos}}</span>
+			<button mat-stroked-button (click)="onNextPhoto()"><mat-icon>arrow_forward</mat-icon></button>
+	</div>
+	<div class="product-details">
+		<div class="presale-warning" *ngIf="presale">
+			Pre-Sale: Ships on {{product.presaleDate}}
+		</div>
+		<div class="sizes-selector" *ngIf="oneSize == true && selectedSize == null">
+			<button mat-flat-button
+				color="primary"
+				*ngFor="let size of product.sizes"
+				(click)="selectSize(size)"
+				[disabled]="!size.available"
+				>Add to Cart</button>
+		</div>
+		<div class="sizes-selector" *ngIf="oneSize == false && selectedSize == null">
+			<button mat-mini-fab
+				color="primary"
+				*ngFor="let size of product.sizes"
+				(click)="selectSize(size)"
+				[disabled]="!size.available"
+				>{{size.abbreviation}}</button>
+		</div>
+		<div class="add-to-cart" *ngIf="selectedSize != null">
+			<span>Add size to cart: {{selectedSize.name}}?</span><br />
+			<button mat-stroked-button (click)="cancelAdd()" class="cancel-add-button">Cancel</button>
+			<button mat-flat-button color="warn" (click)="addToCart()" class="confirm-add-button">Confirm</button>
+		</div>
+	</div>
+</div>

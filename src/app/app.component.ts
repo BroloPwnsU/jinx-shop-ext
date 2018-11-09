@@ -15,7 +15,8 @@ export class AppComponent implements OnInit {
 
 	title = 'Shop';
 	customizationLoaded: boolean = false;
-
+	loadingConfig: boolean = true;
+	shopLoadError: boolean = false;
 
 	//Dev function
 	fabricateAuth(): void {
@@ -27,11 +28,21 @@ export class AppComponent implements OnInit {
 		this.setUserAuth(twitchAuth);
 	}
 
+	setShopLoadError(error): void {
+		this.zone.run(() => {
+			this.messageService.add("Store Config has an error: " + error, true);
+			this.customizationLoaded = false;
+			this.shopLoadError = true;
+			this.loadingConfig = false;
+		})
+	}
+
 	setCustomizationLoaded(customization: StoreCustomization) {
 		this.zone.run(() => {
-			console.log("customs loaded");
 			this.title = customization.title;
 			this.customizationLoaded = true;
+			this.shopLoadError = false;
+			this.loadingConfig = false;
 		});
 	}
 
@@ -41,7 +52,15 @@ export class AppComponent implements OnInit {
 		//Now try to load the customization.
 		this.customizationService.getCustomization().subscribe(
 			(customization) => {
-				this.setCustomizationLoaded(customization);
+				if (customization != null) {
+					this.setCustomizationLoaded(customization);
+				}
+				else {
+					this.setShopLoadError("Config does not exist.");
+				}
+			},
+			(error) => {
+				this.setShopLoadError(error);
 			}
 		);
 	}
@@ -69,5 +88,6 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.fabricateAuth();
 	}
 }
