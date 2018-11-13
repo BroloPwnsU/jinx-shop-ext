@@ -16,7 +16,9 @@ const httpOptions = {
 })
 export class ProductService {
 	
-	private productsUrl = 'http://localhost:8112/products';  // URL to web api
+	//private productsUrl = 'http://localhost:8112/products';
+	private productsUrl = 'http://twitchapistaging.jinx.com/products';
+	
 	
 	getProducts(): Observable<Product[]> {
 
