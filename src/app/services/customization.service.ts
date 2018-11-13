@@ -20,7 +20,8 @@ export class CustomizationService implements OnInit {
 
     customization: StoreCustomization;
 
-    customizationUrl: string = "http://localhost:8112/channels";
+    //customizationUrl: string = "http://localhost:8112/channels";
+    customizationUrl: string = "http://twitchapistaging.jinx.com/channels";
 
     getCustomization(): Observable<StoreCustomization> {
         if (this.customization != null) {
