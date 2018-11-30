@@ -2,11 +2,13 @@ import { Injectable, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 import {MessageService} from './message.service';
 
 import {StoreCustomization} from '../classes/store-customization';
 import { UserService } from './user.service';
+import { AuthHttpClient } from './auth-http-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,7 @@ export class CustomizationService implements OnInit {
 
     customization: StoreCustomization;
 
-    customizationUrl: string = "http://localhost:8112/channels";
+    customizationUrl: string = environment.backendBaseUrl + "/channels";
 
     getCustomization(): Observable<StoreCustomization> {
         if (this.customization != null) {
@@ -35,19 +37,17 @@ export class CustomizationService implements OnInit {
             
             let storeCustomUrl: string = `${this.customizationUrl}/get_store_config.json?channelid=${userAuth.channelId}`;
     
-            return this.http.get<StoreCustomization>(storeCustomUrl)
+            return this.authHttp.get<StoreCustomization>(storeCustomUrl)
                 .pipe(
                     tap(customization => { this.customization = customization; this.log('Fetched customization.'); })
                     , catchError(this.handleError('getCustomization', null))
                 );
-            
-            /*
-            //Use the channelId to load the customization.
-            //TODO: Set defaults.
-            if (this.customization.title == null || this.customization.title == "")
-                this.customization.title = this.defaultTitle;
-            */
         }
+    }
+
+    getFakeAuth(): Observable<string> {
+        let authUrl: string = `${this.customizationUrl}/get_fake_auth.json`;
+        return this.http.get<string>(authUrl);
     }
 
 	/**
@@ -71,13 +71,14 @@ export class CustomizationService implements OnInit {
 	}
 
 	private log(message: string) {
-		this.messageService.add(`ProductService: ${message}`);
+		this.messageService.add(`CustomizationService: ${message}`);
 	}
 
 	constructor(
         private userService: UserService,
         private messageService: MessageService,
-		private http: HttpClient
+        private http: HttpClient,
+        private authHttp: AuthHttpClient
         ) {
 
         /*
