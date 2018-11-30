@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 import {Product} from '../classes/product';
 import {MessageService} from '../services/message.service';
@@ -16,9 +17,8 @@ const httpOptions = {
 })
 export class ProductService {
 	
-	//private productsUrl = 'http://localhost:8112/products';
-	private productsUrl = 'http://twitchapistaging.jinx.com/products';
-	
+	private productsUrl = environment.backendBaseUrl + '/products';  // URL to web api
+	private photosBaseUrl = environment.photosBaseUrl;
 	
 	getProducts(): Observable<Product[]> {
 
@@ -32,7 +32,7 @@ export class ProductService {
 					for(var j = 0; j < products.length; j++) {
 						products[j].photoStubs = new Array();
 						for (var i = 0; i < products[j].numberOfPhotos; i++) {
-							products[j].photoStubs.push(`https://www.jinx.com/productimage/${products[j].id}/${products[j].colorId}/${i+1}/`);
+							products[j].photoStubs.push(`${this.photosBaseUrl}/productimage/${products[j].id}/${products[j].colorId}/${i+1}/`);
 						}
 					}
 					this.log('Fetched products');

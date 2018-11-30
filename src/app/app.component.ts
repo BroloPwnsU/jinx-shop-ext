@@ -20,12 +20,26 @@ export class AppComponent implements OnInit {
 
 	//Dev function
 	fabricateAuth(): void {
-		let twitchAuth: TwitchAuth = new TwitchAuth();
-		twitchAuth.channelId = "999999999";
-		twitchAuth.token = "TOKENOFDOOM";
-		twitchAuth.userId = "1234567890ABCDEFG";
 
-		this.setUserAuth(twitchAuth);
+		//First we get a fake auth, then we use that fake auth to authenticate ourselves.
+		//It's like the door gives us the key. Which seems a bit foolish.
+
+		this.customizationService.getFakeAuth().subscribe(
+			(token) => {
+				this.messageService.debug("Fake Auth: " + token);
+
+				let twitchAuth: TwitchAuth = new TwitchAuth();
+				twitchAuth.token = token;
+				twitchAuth.channelId = "265737932";
+				twitchAuth.userId = "9999999999";
+				this.setUserAuth(twitchAuth);
+			},
+			(error) => {
+				this.messageService.debug("Token failed.");
+			}
+		);
+
+
 	}
 
 	setShopLoadError(error): void {
@@ -48,6 +62,8 @@ export class AppComponent implements OnInit {
 
 	setUserAuth(twitchAuth): void {
 		this.userService.setUserAuth(twitchAuth);
+
+		this.messageService.debug("Set user auth: " + twitchAuth.token);
 
 		//Now try to load the customization.
 		this.customizationService.getCustomization().subscribe(

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-
 import {Notification} from '../classes/notification';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MessageService {
     
-    debugMode: boolean = true;
+    debugMode: boolean = environment.debugLog;
 
     notifications: Notification[] = [];
 
