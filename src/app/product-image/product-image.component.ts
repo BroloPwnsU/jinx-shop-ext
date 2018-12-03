@@ -21,12 +21,12 @@ export class ProductImageComponent implements OnInit, OnChanges {
   }
 
   renderImage(): void {
-    this.messageService.debug("Product Image changing.");
+    //this.messageService.debug("Product Image changing.");
     this.imageLoaded = false;
     this.imageFailed = false;
     
     if (this.imageFolder == null || this.size == null) {
-      this.messageService.debug("Product Image failed.");
+      //this.messageService.debug("Product Image failed.");
       this.imageFailed = true;
       this.imageLoaded = false;
     }
@@ -36,13 +36,13 @@ export class ProductImageComponent implements OnInit, OnChanges {
       productImage.src = url;
 
       productImage.onerror = () => {
-        this.messageService.debug("Product Image does not exist: " + url);
+        //this.messageService.debug("Product Image does not exist: " + url);
         this.imageFailed = true;
         this.imageLoaded = false;
       }
       
       productImage.onload = () => {
-        this.messageService.debug("Product Image loaded.");
+        //this.messageService.debug("Product Image loaded.");
         this.imageSource = url;
         this.imageLoaded = true;
         this.imageFailed = false;

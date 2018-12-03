@@ -36,25 +36,33 @@ export class CartService {
 
 		this.messageService.add(`adding item id=${size.itemId}`);
 
-		var item: CartItem = {
-			productName: product.name,
+		var foundItem = this.cart.items.find((existingItem) => {
+			return existingItem.itemId == size.itemId;
+		});
 
-			colorName: product.colorName,
-			colorHex: product.colorHex,
-			
-			sizeName: size.name,
-			sizeAbbreviation: size.abbreviation,
+		if (foundItem != null) {
+			foundItem.count++;
+		}
+		else {
+			var item: CartItem = {
+				productName: product.name,
 
-			productId: product.id,
-			colorId: product.colorId,
-			sizeId: size.id,
-			itemId: size.itemId,
+				colorName: product.colorName,
+				colorHex: product.colorHex,
+				
+				sizeName: size.name,
+				sizeAbbreviation: size.abbreviation,
 
-			price: size.price,
-			count: 1
-		};
+				productId: product.id,
+				colorId: product.colorId,
+				sizeId: size.id,
+				itemId: size.itemId,
 
-		this.cart.items.push(item);
+				price: size.price,
+				count: 1
+			};
+			this.cart.items.push(item);
+		}
 
 		this.cart.calculateSubtotal();
 		this.storeCart();
