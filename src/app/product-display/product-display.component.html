@@ -1,35 +1,68 @@
 <div class="product">
+	
 	<h4>{{product.name}} - {{product.colorName}}</h4>
-	<app-product-image [imageFolder]="product.photoStubs[this.activePhoto-1]" size="320"></app-product-image>
+
+	<div [class.big-photo-wrapper]="sizesMode == false" [class.crunched-photo-wrapper]="sizesMode == true">
+		<app-product-image [imageFolder]="product.photoStubs[this.activePhoto-1]" size="320"></app-product-image>
+	</div>
+
+	<div class="expand-photo" *ngIf="sizesMode == true">
+		<button mat-icon-button (click)="toggleSizes()"><mat-icon>zoom_out_map</mat-icon></button>
+	</div>
+	
 	<div class="image-changer" *ngIf="product.numberOfPhotos > 1">
 			<button mat-stroked-button (click)="onPreviousPhoto()"><mat-icon>arrow_back</mat-icon></button>
-			<span>Image {{activePhoto}} of {{product.numberOfPhotos}}</span>
 			<button mat-stroked-button (click)="onNextPhoto()"><mat-icon>arrow_forward</mat-icon></button>
 	</div>
-	<div class="product-details">
+
+	<div class="photo-pips" *ngIf="product.numberOfPhotos > 1">
+		<button mat-icon-button (click)="selectPhoto(stub)" *ngFor="let stub of product.photoStubs">
+			<mat-icon *ngIf="isCurrentPhoto(stub)">adjust</mat-icon>
+			<mat-icon *ngIf="!isCurrentPhoto(stub)">brightness_1</mat-icon>
+		</button>
+	</div>
+	
+	<div class="product-price">
+		{{getPrice() | currency}}
+	</div>
+
+	<div class="add-to-cart" *ngIf="sizeSelectionRequired == false">
+		<button mat-flat-button color="primary" (click)="addToCart()" class="confirm-add-button">Add to Cart</button>
+	</div>
+	
+	<!-- Sizes Panel -->
+	
+	<div class="add-to-cart" *ngIf="sizeSelectionRequired == true && sizesMode == false">
+		<button mat-flat-button color="primary" (click)="toggleSizes()">Select a Size</button>
+	</div>
+	<div class="product-details" *ngIf="sizeSelectionRequired == true && sizesMode == true">
 		<div class="presale-warning" *ngIf="presale">
 			Pre-Sale: Ships on {{product.presaleDate}}
 		</div>
-		<div class="sizes-selector" *ngIf="oneSize == true && selectedSize == null">
+
+		<h5>
+			Size:
+			<span class="selected-size" *ngIf="selectedSize != null">{{selectedSize.name}}</span>
+		</h5>
+
+		<!--Sizes list-->
+		<div class="sizes-selector">
 			<button mat-flat-button
-				color="primary"
+				[color]="size == selectedSize ? 'accent' : 'primary'"
 				*ngFor="let size of product.sizes"
 				(click)="selectSize(size)"
-				[disabled]="!size.available"
-				>Add to Cart</button>
+				[class.selected-size-butt]=""
+				[disabled]="!size.available">
+				{{size.abbreviation}}
+			</button>
 		</div>
-		<div class="sizes-selector" *ngIf="oneSize == false && selectedSize == null">
-			<button mat-mini-fab
-				color="primary"
-				*ngFor="let size of product.sizes"
-				(click)="selectSize(size)"
-				[disabled]="!size.available"
-				>{{size.abbreviation}}</button>
+			
+		<div class="add-to-cart" *ngIf="selectedSize == null">
+			<button disabled color="primary" mat-flat-button (click)="toggleSizes()">Select a Size</button>
 		</div>
 		<div class="add-to-cart" *ngIf="selectedSize != null">
-			<span>Add size to cart: {{selectedSize.name}}?</span><br />
-			<button mat-stroked-button (click)="cancelAdd()" class="cancel-add-button">Cancel</button>
-			<button mat-flat-button color="warn" (click)="addToCart()" class="confirm-add-button">Confirm</button>
+			<button mat-flat-button color="primary" (click)="addToCart()" class="confirm-add-button">Add to Cart</button>
 		</div>
 	</div>
+
 </div>

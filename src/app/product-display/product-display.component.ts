@@ -14,7 +14,8 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 
 	@Input() product : Product;
 
-	sizesMode: boolean;
+	sizeSelectionRequired: boolean = true;
+	sizesMode: boolean = false;
 	buttonMessage: string;
 	activePhoto: number = 1;
 	selectedSize: SizeItem = null;
@@ -29,6 +30,11 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 		this.activePhoto = 1;
 		this.selectedSize = null;
 		this.oneSize = (this.product.sizes.length == 1);
+		this.sizeSelectionRequired = (this.oneSize == false || this.product.hideSizes != true);
+
+		if (!this.sizeSelectionRequired) {
+			this.selectedSize = this.product.sizes[0];
+		}
 
 		if (this.product.presaleDate != null) {
 			this.presale = true;
@@ -63,8 +69,15 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 	addToCart(): void {
 		//Adds the previously selected size to the cart.
 
+		this.messageService.debug(this.selectedSize.name);
+
 		this.cartService.addItem(this.product, this.selectedSize);
-		this.selectedSize = null;
+		
+		if (this.sizeSelectionRequired) {
+			this.selectedSize = null;
+		}
+
+		this.sizesMode = false;
 	}
 
 	onNextPhoto(): void {
@@ -73,7 +86,7 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 		else
 			this.activePhoto = this.activePhoto + 1;
 
-		this.messageService.add("Ph " + this.activePhoto);
+		this.messageService.debug("Ph " + this.activePhoto);
 	}
 
 	onPreviousPhoto(): void {
@@ -82,7 +95,33 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 		else
 			this.activePhoto = this.activePhoto - 1;
 			
-		this.messageService.add("Ph " + this.activePhoto);
+		this.messageService.debug("Ph " + this.activePhoto);
+	}
+
+	selectPhoto(photoStub: string): void {
+		for(var i = 0; i < this.product.photoStubs.length; i++) {
+			if (photoStub === this.product.photoStubs[i]) {
+				this.activePhoto = i + 1;
+				break;
+			}
+		}
+	}
+
+	isCurrentPhoto(stub: string): boolean {
+		return (this.product.photoStubs[this.activePhoto - 1] === stub);
+	}
+
+	getPrice(): number {
+		if (this.product.sizes.length > 0) {
+			return this.product.sizes[0].price;
+		}
+		return NaN;
+	}
+
+	toggleSizes(): void {
+		//Clear out selected size so the interface resets.
+		this.selectedSize = null;
+		this.sizesMode = !this.sizesMode;
 	}
 
 	constructor(

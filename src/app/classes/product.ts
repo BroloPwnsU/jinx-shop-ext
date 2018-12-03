@@ -10,8 +10,8 @@ export class Product {
 	id: number;
 	colorId: number;
 
+	hideSizes: boolean;
 	numberOfPhotos: number;
-
 	presaleDate: string;
 
 	photoStubs: string[];

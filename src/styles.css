@@ -100,3 +100,24 @@ nav {
 .float-right {
   float: right;
 }
+
+.shop-list-image {
+  width: 144px;
+  height: 144px;
+  float: left;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  border: 2px solid black;
+}
+
+.crunched-photo-wrapper {
+  width: 50%;
+}
+
+.selected-size-butt {
+  background-color: red;
+}
+
+.add-to-cart {
+  margin-top: 5px;
+}

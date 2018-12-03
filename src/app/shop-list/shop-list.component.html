@@ -1,10 +1,24 @@
 <div *ngIf="products">
-  <div class="shop-list">
-    <app-product-display [product]="product" *ngFor="let product of products"></app-product-display>
-  </div>
+
+    <div class="product-popper" *ngIf="activeProduct != null">
+      <button mat-flat-button color="primary" (click)="closeProduct()"><mat-icon>arrow_back_ios</mat-icon> Back</button>
+      <app-product-display [product]="activeProduct"></app-product-display>
+    </div>
+    
+    <div class="shop-list" *ngIf="activeProduct == null">
+        <div *ngFor="let product of products" class="shop-list-image">
+            <app-product-image 
+              [imageFolder]="product.photoStubs[0]" 
+              size="144"
+              (click)="activateProduct(product)"
+              ></app-product-image>
+        </div>
+    </div>
+
 </div>
 
 <div *ngIf="products == null || products.length == 0">
   No products loaded
 </div>
-  
+
+<div class="clear"></div>

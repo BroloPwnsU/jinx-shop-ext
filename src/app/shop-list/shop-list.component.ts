@@ -11,8 +11,8 @@ import {MessageService} from '../services/message.service';
 })
 export class ShopListComponent implements OnInit {
 	
+	activeProduct: Product;
 	products: Product[];
-
 
 	getProducts(): void {
 		this.productService.getProducts()
@@ -23,8 +23,17 @@ export class ShopListComponent implements OnInit {
 		this.products = products;
 	}
 
-  log(message: string): void {
-		this.messageService.add(message);
+	activateProduct(product: Product): void {
+		if (product == null) {
+			this.activeProduct = null;
+			return;
+		}
+
+		this.activeProduct = product;
+	}
+
+	closeProduct(): void {
+		this.activeProduct = null;
 	}
 
 	constructor(

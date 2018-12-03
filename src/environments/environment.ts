@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  debugLog: false,
+  debugLog: true,
   backendBaseUrl: 'http://localhost:8112',
-  photosBaseUrl: 'https://www.jinx.com'
+  photosBaseUrl: 'https://www.jinx.com',
+  shopMode: 'list'
 };
 
 /*

@@ -1,4 +1,4 @@
 
-
 <app-shopping-cart-header [onCartPage]="false"></app-shopping-cart-header>
-<app-shop-swipe></app-shop-swipe>
+<app-shop-list *ngIf="shopMode == 'list'"></app-shop-list>
+<app-shop-swipe *ngIf="shopMode == 'swipe'"></app-shop-swipe>

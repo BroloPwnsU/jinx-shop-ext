@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from '../../environments/environment';
 import {MessageService} from '../services/message.service';
 
 @Component({
@@ -10,6 +10,7 @@ import {MessageService} from '../services/message.service';
 export class ShopComponent implements OnInit {
 
 	checkingOut: boolean = false;
+	shopMode: string = environment.shopMode;
 
 	startCheckout(): void {
 		this.checkingOut = true;
