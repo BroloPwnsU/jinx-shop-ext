@@ -4,27 +4,25 @@
 
 	<div [class.big-photo-wrapper]="sizesMode == false" [class.crunched-photo-wrapper]="sizesMode == true">
 		<app-product-image [imageFolder]="product.photoStubs[this.activePhoto-1]" size="320"></app-product-image>
+		<div class="image-changer" *ngIf="product.numberOfPhotos > 1">
+				<button mat-stroked-button (click)="onPreviousPhoto()"><mat-icon>arrow_back</mat-icon></button>
+				<button mat-stroked-button (click)="onNextPhoto()"><mat-icon>arrow_forward</mat-icon></button>
+		</div>
+		<div class="expand-photo" *ngIf="sizesMode == true">
+			<button mat-icon-button (click)="toggleSizes()"><mat-icon>zoom_out_map</mat-icon></button>
+		</div>
+		<div class="photo-pips" *ngIf="product.numberOfPhotos > 1">
+			<button mat-icon-button (click)="selectPhoto(stub)" *ngFor="let stub of product.photoStubs">
+				<mat-icon *ngIf="isCurrentPhoto(stub)">adjust</mat-icon>
+				<mat-icon *ngIf="!isCurrentPhoto(stub)">brightness_1</mat-icon>
+			</button>
+		</div>
+		<div class="product-price">
+			{{getPrice() | currency}}
+		</div>
 	</div>
 
-	<div class="expand-photo" *ngIf="sizesMode == true">
-		<button mat-icon-button (click)="toggleSizes()"><mat-icon>zoom_out_map</mat-icon></button>
-	</div>
 	
-	<div class="image-changer" *ngIf="product.numberOfPhotos > 1">
-			<button mat-stroked-button (click)="onPreviousPhoto()"><mat-icon>arrow_back</mat-icon></button>
-			<button mat-stroked-button (click)="onNextPhoto()"><mat-icon>arrow_forward</mat-icon></button>
-	</div>
-
-	<div class="photo-pips" *ngIf="product.numberOfPhotos > 1">
-		<button mat-icon-button (click)="selectPhoto(stub)" *ngFor="let stub of product.photoStubs">
-			<mat-icon *ngIf="isCurrentPhoto(stub)">adjust</mat-icon>
-			<mat-icon *ngIf="!isCurrentPhoto(stub)">brightness_1</mat-icon>
-		</button>
-	</div>
-	
-	<div class="product-price">
-		{{getPrice() | currency}}
-	</div>
 
 	<div class="add-to-cart" *ngIf="sizeSelectionRequired == false">
 		<button mat-flat-button color="primary" (click)="addToCart()" class="confirm-add-button">Add to Cart</button>
