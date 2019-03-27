@@ -26,6 +26,7 @@ import { CheckoutCompleteComponent } from './checkout-complete/checkout-complete
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
 import { ProductImageComponent } from './product-image/product-image.component';
+import { ProductPictureDirective } from './directives/product-picture.directive';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProductImageComponent } from './product-image/product-image.component';
     CheckoutCompleteComponent,
     ShopListComponent,
     LoadingPanelComponent,
-    ProductImageComponent
+    ProductImageComponent,
+    ProductPictureDirective
   ],
   imports: [
     BrowserModule,
