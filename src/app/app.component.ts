@@ -5,6 +5,7 @@ import {UserService} from './services/user.service';
 import { CustomizationService } from './services/customization.service';
 import { TwitchAuth } from './classes/twitch-auth';
 import { StoreCustomization } from './classes/store-customization';
+import { environment } from '../environments/environment.prod';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
 	customizationLoaded: boolean = false;
 	loadingConfig: boolean = true;
 	shopLoadError: boolean = false;
+	messagesEnabled: boolean = environment.messagesEnabled;
 
 	//Dev function
 	fabricateAuth(): void {

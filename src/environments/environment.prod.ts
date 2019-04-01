@@ -1,6 +1,8 @@
 export const environment = {
   production: true,
   debugLog: true,
-  backendBaseUrl: 'https://twitchapi.jinx.com:8112',
+  messagesEnabled: true,
+  cartEnabled: false,
+  backendBaseUrl: 'http://twitchapistaging.jinx.com/',
   photosBaseUrl: 'https://www.jinx.com'
 };

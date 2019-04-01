@@ -23,8 +23,11 @@
 	</div>
 	
 	<!-- Sizes Panel -->
+	<div class="add-to-cart" *ngIf="!cartEnabled && sizesMode == false">
+		<a mat-flat-button color="primary" target="shopwindow" href="{{productLink}}">Buy Me</a>
+	</div>
 	
-	<div class="add-to-cart" *ngIf="sizesMode == false">
+	<div class="add-to-cart" *ngIf="cartEnabled && sizesMode == false">
 		<button mat-flat-button color="primary" (click)="toggleSizes()">Select a Size</button>
 	</div>
 	

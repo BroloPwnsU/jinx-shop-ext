@@ -1,11 +1,12 @@
 
 <nav>
 	<div *ngIf="onCartPage == false" class="cart-icon">
-		<a class="cart-count" mat-mini-fab color="primary" routerLink="/cart" *ngIf="cart.getCount() > 0">
+		<img class="store-logo" *ngIf="cartEnabled == false" src="https://www.jinx.com/content/responsive_themes/twitch/shroud_logo_text.png" />
+
+		<a class="cart-count" mat-mini-fab color="primary" routerLink="/cart" *ngIf="cartEnabled && cart.getCount() > 0">
 			{{cart.getCount()}}
 		</a>
-		<a mat-icon-button color="basic" routerLink="/cart"><mat-icon>shopping_cart</mat-icon></a>
-		<!--<mat-icon  matBadge="{{cart.getCount()}}" matBadgePosition="after" matBadgeSize="medium" >shopping_cart</mat-icon>-->
+		<a *ngIf="cartEnabled" mat-icon-button color="basic" routerLink="/cart"><mat-icon>shopping_cart</mat-icon></a>
 	</div>
 	<!--<div *ngIf="onCartPage == false">
 		Subtotal: {{cart.subtotal | currency}}

@@ -3,6 +3,7 @@
 body {
   margin: 0;
   font-family: Oswald, Arial, Helvetica, sans-serif;
+  background-color: #444;
 }
 
 /* Application-wide Styles */
@@ -105,12 +106,17 @@ nav .shop-more {
   line-height: 3.5em;
 }
 
+nav .store-logo {
+  max-width: 190px;
+  padding-top: 13px;
+}
+
 .center-wrapper {
-  max-width: 300px;
+  max-width: 320px;
   margin: auto;
   text-align: center;
   padding-top: 5px;
-  background-color: #17141f;
+  background-color: #000; /*#17141f;*/
 }
 
 .stay-square {
@@ -277,7 +283,8 @@ div.crunched-photo-wrapper div.image-arrows {
   margin-top: 0px;
 }
 
-.add-to-cart button {
+.add-to-cart button,
+.add-to-cart a {
   width: 100%;
   font-weight: bold;
   text-transform: uppercase;
@@ -328,4 +335,9 @@ button.return-policy-link {
 .sizes-selector button {
   margin-left: 5px;
   margin-bottom: 5px;
+}
+
+
+.messages_block {
+  border-top: 1px solid #673ab7;
 }

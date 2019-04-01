@@ -4,6 +4,7 @@ import {CartService} from '../services/cart.service';
 import {MessageService} from '../services/message.service';
 import {Product} from '../classes/product';
 import {SizeItem} from '../classes/size-item';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-product-display',
@@ -22,11 +23,14 @@ export class ProductDisplayComponent implements OnInit, OnChanges {
 	oneSize: boolean = false;
 	presale: boolean = false;
 	presaleDate: string = null;
+	productLink: string;
+	cartEnabled: boolean = environment.cartEnabled;
 
 	setupProduct(): void {
 		if (this.product == null)
 			return;
 
+		this.productLink = `https://staging.jinx.com/p/${this.product.url}.html`;
 		this.activePhoto = 1;
 		this.selectedSize = null;
 		this.oneSize = (this.product.sizes.length == 1);
