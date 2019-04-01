@@ -1,7 +1,12 @@
 <div *ngIf="products">
 
     <div class="product-popper" *ngIf="activeProduct != null">
-      <button mat-flat-button color="primary" (click)="closeProduct()"><mat-icon>arrow_back_ios</mat-icon> Back</button>
+      <div class="product-popper-header">
+        <button mat-flat-button color="basic" (click)="closeProduct()"><mat-icon>arrow_back_ios</mat-icon> Back</button>
+        <h4 class="product-title">
+          {{activeProduct.name}}
+        </h4>
+      </div>
       <app-product-display [product]="activeProduct"></app-product-display>
     </div>
     

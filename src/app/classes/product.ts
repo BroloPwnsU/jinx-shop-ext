@@ -17,4 +17,6 @@ export class Product {
 	photoStubs: string[];
 	
 	sizes: SizeItem[];
+
+	url: string;
 }

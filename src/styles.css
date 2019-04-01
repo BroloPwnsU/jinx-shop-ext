@@ -1,26 +1,87 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+body {
+  margin: 0;
+  font-family: Oswald, Arial, Helvetica, sans-serif;
+  background-color: #444;
+}
+
 /* Application-wide Styles */
 h1 {
-  color: red;
-  font-family: Arial, Helvetica, sans-serif;
+  color: fff;
+  font-family: Oswald, Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
 h2, h3 {
-  color: #444;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  font-family: Oswald, Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
-body {
-  margin: 0;
-}
 body, input[text], button {
-  color: #888;
-  font-family: Cambria, Georgia;
+  color: #eee;
+  font-family:  Oswald, Cambria, Georgia;
+}
+button {
+  color: #eee;
+  background-color: #673ab7;
+  font-family:  Oswald, Cambria, Georgia;
+}
+button {
+  color: #fff;
+  text-transform: uppercase;
+  border: 0;
+  border-bottom: 2px solid #b19dd8;
+  padding: 0px;
+  margin-bottom: 2px;
+  background: transparent;
+  cursor: pointer;
 }
 /* everywhere else */
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:  Oswald, Arial, Helvetica, sans-serif;
+}
+
+.jinx-shop .mat-button, 
+.jinx-shop .mat-flat-button, 
+.jinx-shop .mat-icon-button, 
+.jinx-shop .mat-stroked-button {
+  border-radius: 0px;
+}
+
+.jinx-shop .mat-fab.mat-basic, 
+.jinx-shop .mat-flat-button.mat-basic, 
+.jinx-shop .mat-mini-fab.mat-basic, 
+.jinx-shop .mat-raised-button.mat-basic {
+  background-color: #3d3d3d;
+  color: #fff;
+}
+
+.jinx-shop .mat-fab.mat-primary, 
+.jinx-shop .mat-flat-button.mat-primary, 
+.jinx-shop .mat-mini-fab.mat-primary, 
+.jinx-shop .mat-raised-button.mat-primary {
+  background-color: #4b367c;
+  color: #fff;
+}
+
+.jinx-shop .mat-fab.mat-accent, 
+.jinx-shop .mat-flat-button.mat-accent, 
+.jinx-shop .mat-mini-fab.mat-accent, 
+.jinx-shop .mat-raised-button.mat-accent {
+  background-color: #b19dd8;
+  color: #fff;
+}
+
+.mat-list-base .mat-list-item {
+  color: #eee;
+}
+
+.highlight-text {
+  color: #b19dd8;
+}
+
+.chill-text {
+  color: #8e8e8e;
 }
 
 div.fake-iframe {
@@ -36,20 +97,26 @@ div.fake-iframe {
 }
 
 nav {
+  background: url(https://www.jinx.com/content/twitch/logo_dark_bg.png) no-repeat left top;
   text-align: right;
+  height: 3em;
 }
 
-.cart-icon {
-  position: fixed;
-  left: 0;
-  top: 5px;
+nav .shop-more {
+  line-height: 3.5em;
+}
+
+nav .store-logo {
+  max-width: 190px;
+  padding-top: 13px;
 }
 
 .center-wrapper {
-  max-width: 300px;
+  max-width: 320px;
   margin: auto;
   text-align: center;
   padding-top: 5px;
+  background-color: #000; /*#17141f;*/
 }
 
 .stay-square {
@@ -70,19 +137,6 @@ nav {
 .image-changer span {
   padding-left: 5px;
   padding-right: 5px;
-}
-
-.product-details {
-  padding: 10px;
-}
-
-.product-details .mat-mini-fab {
-  margin: 0 2px;
-}
-
-.product-details .presale-date {
-  color: red;
-  padding-bottom: 10px;
 }
 
 .clear {
@@ -110,14 +164,180 @@ nav {
   border: 2px solid black;
 }
 
-.crunched-photo-wrapper {
-  width: 50%;
-}
-
 .selected-size-butt {
   background-color: red;
 }
 
+
+.product-popper-header {
+  height: 3em;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+}
+.product-popper-header button {
+  float:left;
+  height: 3.5em;
+  margin-right: 7px;
+}
+
+.product-popper-header h4.product-title {
+  margin: 0;
+  padding-right:7px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.big-photo-wrapper {
+  position: relative;
+  height: 320px;
+}
+
+.crunched-photo-wrapper {
+  position: relative;
+  height: 200px;
+}
+
+div.photo-bar {    
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+div.product-price {
+  float: left;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.3em;
+  padding: 8px 12px;
+  background-color: #000;
+}
+
+div.photo-pips {
+  float:right;
+  color: #fff;
+  padding-right: 8px;
+  padding-top: 2px;
+}
+
+div.photo-pips button.mat-icon-button {
+  width: 30px;
+  height: 30px;
+}
+
+div.photo-pips button.mat-icon-button .mat-icon {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+div.image-arrows {
+  position: absolute;
+  width:100%;
+  top:45%;
+}
+
+div.image-arrows button.mat-icon-button {
+  text-align: left;
+  width: 2.6em;
+  height: 2.6em;
+  line-height: 0;
+}
+
+div.image-arrows .mat-icon {
+  font-size:2.6em;
+}
+
+button.image-arrow-left {
+  float:left;
+  background-color: #673ab7;
+  color: white;
+}
+
+button.image-arrow-right {
+  float:right;
+  background-color: #673ab7;
+  color: white;
+}
+
+.expand-photo {
+  width: 100%;
+  text-align: right;
+}
+.expand-photo button {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 18px 0px 0;
+  width: 3.5em;
+  height:3.6em;
+}
+.expand-photo button .mat-icon {
+  font-size: 3em;
+  font-weight: 600;
+}
+
+div.crunched-photo-wrapper div.image-arrows {
+  display: none;
+}
+
 .add-to-cart {
-  margin-top: 5px;
+  margin-top: 0px;
+}
+
+.add-to-cart button,
+.add-to-cart a {
+  width: 100%;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
+
+
+.product-details {
+  padding: 0;
+}
+
+.product-details .presale-date {
+  color: red;
+  padding-bottom: 10px;
+}
+
+.product-details h5 {
+  margin: 5px 5px;
+  text-align: left;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.product-details .extras {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+
+button.fit-guide-link {
+  margin-left: 10px;
+  font-size: 1em;
+}
+
+button.return-policy-link {
+  text-transform: none;
+  float: right;
+  margin-right: 10px;
+  border: 0;
+  font-size: 1em;
+}
+
+.sizes-selector {
+  text-align: left;
+}
+
+.sizes-selector button {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+
+.messages_block {
+  border-top: 1px solid #673ab7;
 }

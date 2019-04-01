@@ -5,7 +5,10 @@
 export const environment = {
   production: false,
   debugLog: true,
-  backendBaseUrl: 'http://localhost:8112',
+  messagesEnabled: true,
+  cartEnabled: false,
+  //backendBaseUrl: 'http://localhost:8112/',
+  backendBaseUrl: 'http://twitchapistaging.jinx.com/',
   photosBaseUrl: 'https://www.jinx.com',
   shopMode: 'list'
 };
